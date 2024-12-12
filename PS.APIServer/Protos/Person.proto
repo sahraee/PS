@@ -1,0 +1,67 @@
+﻿syntax = "proto3";
+import "google/protobuf/timestamp.proto";
+
+option csharp_namespace = "PS.APIServer";
+
+message AddPersonRequest {
+	string first_name = 1;
+	string last_name = 2;
+	string national_code=3;
+	google.protobuf.Timestamp birth_date=4;
+
+}
+
+message AddPersonResponse {
+	int32 result = 1;
+	string message=2;
+}
+
+message GetPersonRequest{
+	int32 person_id=1;
+}
+
+message GetPersonResponse {
+	int32 person_id=1;
+	string first_name =2;
+	string last_name = 3;
+	string national_code=4;
+	google.protobuf.Timestamp birth_date=5;
+	string message=6;
+}
+
+message UpdatePersonRequest{
+	int32 person_id=1;
+	string first_name =2;
+	string last_name = 3;
+	string national_code=4;
+	google.protobuf.Timestamp birth_date=5;
+
+}
+message UpdatePersonResponse
+{
+
+	bool result=1;
+	string message=2;
+}
+
+message DeletePersonRequest{
+	int32 person_id=1;
+}
+message DeletePersonResponse
+{
+
+	bool result=1;
+	string message=2;
+}
+
+
+
+
+service Person {
+	rpc Add(AddPersonRequest) returns (AddPersonResponse);
+	rpc Get(GetPersonRequest) returns (GetPersonResponse);
+	rpc Update(UpdatePersonRequest) returns (UpdatePersonResponse);
+	rpc Delete(DeletePersonRequest) returns (DeletePersonResponse);
+
+
+}
